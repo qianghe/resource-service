@@ -1,0 +1,70 @@
+.file-list {
+  display: flex;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 900px;
+  margin: 0 auto;
+
+  border-top: 4px dotted #eee;
+  padding-top: 36px;
+
+  > div {
+    margin-right: 20px;
+    margin-bottom: 20px;
+  }
+}
+
+$item-width: 200px;
+$item-height: 70px;
+$item-padding-top: 6px;
+$item-padding-left: 8px;
+
+.file-listItem-failOrload,
+.file-listItem-success {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: $item-width;
+  height: $item-height;
+  padding: 6px 8px;
+  background-color: var(--bg, "#eee");
+
+  > div:nth-of-type(1) {
+    display: flex;
+    flex-flow: column;
+    justify-content: space-around;
+    align-items: flex-end;
+    height: 100%;
+    $imgSize: var(--size, 60px);
+    width: calc(100% - $imgSize - $item-padding-left);
+
+    span[role="img"] {
+      margin-left: 4px;
+    }
+  }
+
+  .name {
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .fail-tip {
+    color: #eb2f96;
+    font-size: 12px;
+  }
+  .loading-tip {
+    font-weight: bold;
+    margin-left: 4px;
+    font-size: 12px;
+  }
+}
+
+.file-listItem-success {
+  > img {
+    max-height: var(--size, 60px);
+    max-width: 40%;
+  }
+}
