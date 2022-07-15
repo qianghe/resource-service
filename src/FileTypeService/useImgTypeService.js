@@ -9,17 +9,20 @@ function useImgTypeService({
 }) {
   const check = useCallback(async (fileInfo) => {    
     const { file, ...props } = fileInfo
+    const base64 = await getFileDataURL(file)
     const buffer = await getFileBuffer(file)
-    const imgType = getImgType(buffer)
+    let imgType = getImgType(buffer)
+    if (!imgType) {
+      const mimeType = base64.match(/^data:(.+);base64/)[1]
+      if (mimeType.indexOf('image/svg') > -1) {
+        imgType = mimeType
+      }
+    }
     let preview = null
-    let base64 = null
     if (imgType && withPreview) {
-      base64 = await getFileDataURL(file)
       preview = await base64ToBlob(base64)
     }
-    await new Promise(resolve => {
-      setTimeout(() => resolve(), 5000)
-    })
+
     notify({
       type: imgType,
       ...props,
