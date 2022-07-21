@@ -1,0 +1,39 @@
+@import url("../index.css");
+
+.convertor {
+  button {
+    margin-top: 40px;
+  }
+
+  input[type="file"] {
+    opacity: 0;
+  }
+
+  .list {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-top: 42px;
+
+    img,
+    video {
+      display: block;
+      width: 240px;
+      min-height: 100px;
+    }
+  }
+
+  .item {
+    position: relative;
+    margin-right: 24px;
+  }
+  .tag {
+    display: inline-block;
+    margin-bottom: 8px;
+  }
+  .loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+  }
+}

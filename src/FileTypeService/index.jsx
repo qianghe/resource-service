@@ -1,8 +1,9 @@
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useEffect, useCallback, useRef, useState } from 'react';
 import { Typography, Upload } from 'antd'
 import useImgTypeService from './useImgTypeService'
 import FileList, { STATUS_FAIL, STATUS_SUCCESS, STATUS_LOADING } from './FileList'
 import './index.scss'
+import 'antd/dist/antd.css'; // or 'antd/dist/antd.less'
 
 const { Title, Paragraph } = Typography;
 const { Dragger } = Upload;
@@ -67,6 +68,19 @@ function FileTypeService() {
 
     return false
   }, [check])
+
+  useEffect(() => {
+    return () => {
+      console.log('no....')
+      const $styles = document.getElementsByTagName('style')
+      if (!$styles) return
+      [...$styles]
+        .filter($s => $s.innerHTML.indexOf('antd') > -1)
+        .forEach($node => {
+          $node.remove()
+        })
+    }
+  }, [])
  
   return (
     <>
