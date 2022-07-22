@@ -1,7 +1,7 @@
 import React, { useCallback, useRef } from 'react';
-import { Space, Button, Typography } from 'antd';
-import { CloudUploadOutlined, LoadingOutlined } from '@ant-design/icons'
-import { translate } from './utils'
+import { Space, Button, Progress, Typography } from 'antd';
+import { CloudUploadOutlined } from '@ant-design/icons'
+import useConvertor from './useConvertor';
 import './index.scss'
 
 const { Title, Text } = Typography;
@@ -19,7 +19,14 @@ const Describtion = () => (
 function VideoConvertor() {
   const rawRef = useRef()
   const gifRef = useRef()
-  
+  const canvasRef = useRef()
+  const {
+    isProgress, progress, translate,
+    isPlaying, play, pause
+  } = useConvertor({
+    needControll: true,
+    controllRef: canvasRef
+  })
   // 处理上传的视频
   const handleChange = useCallback(async (event) => {
     const file = event.target.files[0]
@@ -31,7 +38,14 @@ function VideoConvertor() {
     const blob = await translate(file)
     gifRef.current.src = blob
   }, [])
-  const isLoading = rawRef.current && !gifRef.current
+  const handleControl = useCallback(() => {
+    if (isPlaying) {
+      pause()
+    } else {
+      play()
+    }
+  }, [isPlaying])
+  const showInfo = isProgress || rawRef.current
 
   return (
     <div className="convertor">
@@ -40,7 +54,9 @@ function VideoConvertor() {
         <input type="file" onChange={handleChange} />
         Upload
       </Button>
-      <div className="list">
+      <div className="list" style={{
+        visibility: showInfo ? 'visible' : 'hidden'
+      }}>
         <div className="item">
           <span className="tag">Raw Vedio</span>
           <video src="" alt="" ref={rawRef} />
@@ -49,8 +65,24 @@ function VideoConvertor() {
           <span className="tag">Convert GIF</span>
           <img src="" alt="" ref={gifRef} />
           {
-            isLoading ? <LoadingOutlined className="loading" /> : ''
+            isProgress ? <Progress
+              showInfo={false}
+              percent={parseInt(progress * 100)}
+              steps={4}
+              strokeColor={['#bfbfbf', '#595959', '#434343', '#1f1f1f']}
+            /> : ''
           }
+        </div>
+        <div className="item item-control">
+          <span className="tag">Controller</span>
+          <div className="control-content">
+            <canvas ref={canvasRef} width="240" height="170"/>
+            <div className="controllBtn" onClick={handleControl}>
+              {
+                isPlaying ? 'pause' : 'play'
+              }
+            </div>
+          </div>
         </div>
       </div>
     </div>

@@ -6,12 +6,14 @@ const ffmpeg = createFFmpeg({
 
 export const translate = async (file) => {
   await ffmpeg.load()
-
   console.log('Start transcoding')
   ffmpeg.FS('writeFile', file.name, await fetchFile(file));
+  ffmpeg.setProgress((p)=> {
+    console.log('*************progress..........', p)
+  })
 
   const targetFile = 'demo.gif'
-  await ffmpeg.run('-i', file.name, targetFile);
+  const res = await ffmpeg.run('-i', file.name, targetFile);
   console.log('Complete transcoding');
 
   const data = ffmpeg.FS('readFile', targetFile);

@@ -16,10 +16,16 @@
     margin-top: 42px;
 
     img,
-    video {
+    video,
+    canvas {
       display: block;
       width: 240px;
       min-height: 100px;
+    }
+
+    img,
+    canvas {
+      background-color: rgba(255, 255, 255, 0.05);
     }
   }
 
@@ -35,5 +41,45 @@
     position: absolute;
     top: 50%;
     left: 50%;
+  }
+
+  div.ant-progress {
+    position: absolute;
+    top: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    > div {
+      display: flex;
+    }
+  }
+}
+
+.control-content {
+  position: relative;
+}
+
+.item-control {
+  $btn-size: 46px;
+
+  .controllBtn {
+    display: none;
+    position: absolute;
+    width: $btn-size;
+    height: $btn-size;
+    border-radius: 50%;
+    background-color: rgb(26, 26, 26, 0.3);
+    color: #fff;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    line-height: $btn-size;
+  }
+  &:hover {
+    cursor: pointer;
+
+    .controllBtn {
+      display: block;
+    }
   }
 }
