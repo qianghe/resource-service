@@ -1,0 +1,11 @@
+.entry {
+  nav {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+
+    > a {
+      margin-right: 8px;
+    }
+  }
+}
