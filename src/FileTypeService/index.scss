@@ -1,3 +1,14 @@
+.file-type-service {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.dragger {
+  display: inline-block;
+}
+
 .itc {
   width: 400px;
   margin: auto;

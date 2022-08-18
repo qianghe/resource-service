@@ -11,6 +11,10 @@ const routes = [{
   path: '/lucky-card',
   name: 'Canvas处理图像Demo',
   component: React.lazy(() => import('./LuckyCard'))
+}, {
+  path: '/grab-vedio',
+  name: '抓取B站视频',
+  component: React.lazy(() => import('./GrabBiliVedio'))
 }]
 
 export default routes

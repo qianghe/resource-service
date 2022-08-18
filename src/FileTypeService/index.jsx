@@ -72,10 +72,11 @@ function FileTypeService() {
   useAntdCss()
  
   return (
-    <>
+    <div className="file-type-service">
       <div className="itc">
         {Describer}
         <Dragger
+          classsName="dragger"
           accept="image/*"
           multiple={true}
           beforeUpload={handleBeforeUplod}
@@ -89,7 +90,7 @@ function FileTypeService() {
         </Dragger>
       </div>
       <FileList files={Object.values(fileMap).reverse()} />
-    </>
+    </div>
   );
 }
 

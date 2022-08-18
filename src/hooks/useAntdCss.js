@@ -1,26 +1,39 @@
 
 import { useEffect } from 'react'
-import 'antd/dist/antd.css'
 
-let antdStyleMemo = null
+const antdStyleMemo = {
+  light: null,
+  dark: null
+}
 
-function useAntdCss() {
+function useAntdCss({ theme = 'light' } = { theme: 'light' }) {
   useEffect(() => {
-    if (antdStyleMemo) {
+    if (!antdStyleMemo[theme]) {
+      if (theme === 'light') {
+        import('antd/dist/antd.css')
+      } else {
+        import("antd/dist/antd.dark.css")
+      }
+    } else {
       const $head = document.getElementsByTagName('head')
       if ($head) {
-        $head[0].appendChild(antdStyleMemo)
+        $head[0].appendChild(antdStyleMemo[theme])
       }
     }
-
+    
+    
     return () => {
       const $styles = document.getElementsByTagName('style')
       if (!$styles) return
-      [...$styles]
+      
+      ;[...$styles]
         .filter($s => $s.innerHTML.indexOf('antd') > -1)
         .forEach($node => {
-          antdStyleMemo = $node
           $node.remove()
+          console.log('...remove')
+          if (!antdStyleMemo[theme]) {
+            antdStyleMemo[theme] = $node
+          }
         })
     }
   }, [])

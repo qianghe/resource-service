@@ -12,7 +12,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route element={<Entry />}>
+        <Route index="/" element={<Entry />}>
           {
             routes.map(({ path, component: Component }, index) => {
               return (
