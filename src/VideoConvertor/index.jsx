@@ -27,10 +27,19 @@ function VideoConvertor() {
     needControll: true,
     controllRef: canvasRef
   })
+  const clearRef = () => {
+    rawRef.current.src = ''
+    gifRef.current.src = ''
+    // canvas
+    const canvas = canvasRef.current
+    const context = canvas.getContext('2d')
+    context.clearRect(0, 0, canvas.width, canvas.height)
+  }
   // 处理上传的视频
   const handleChange = useCallback(async (event) => {
     const file = event.target.files[0]
     if (!file) return
+    clearRef()
     // raw
     const rawBlob = URL.createObjectURL(file)
     rawRef.current.src = rawBlob
