@@ -15,6 +15,14 @@ const routes = [{
   path: '/grab-vedio',
   name: '抓取B站视频',
   component: React.lazy(() => import('./GrabBiliVedio'))
+}, {
+  path: '/dom-to-image',
+  name: 'dom转换成image',
+  component: React.lazy(() => import('./Dom2Image'))
+}, {
+  path: '/canvas-dealImgs',
+  name: 'canvas处理图像',
+  component: React.lazy(() => import('./CanvasDealImgs'))
 }]
 
 export default routes

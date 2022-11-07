@@ -107,11 +107,10 @@ const initialise = async () => {
 
     await pyodide.loadPackage("micropip");
     const micropip = pyodide.pyimport("micropip");
-    console.log('micropip', micropip)
     await micropip.install('requests')
     
     postMessage({
-        type: 'ready',
+      type: 'ready',
     })
 
     // Unfortunately we need to fake-out stdin/stdout/stderr because Pyodide

@@ -11,8 +11,12 @@ export const loadImg = (imgSrc: string, width?: number, height?: number) => {
 	const promise = new Promise((resolve) => {
 		resolver = resolve
 	})
+	const customParams = width ? [width] : []
 
-	const img = width ? new Image(width, height) : new Image()
+	if (customParams.length === 1 && height) {
+		customParams.push(height)
+	}
+	const img = width ? new Image(...customParams) : new Image()
 	
 	img.onload = function() {
 		if (resolver) {

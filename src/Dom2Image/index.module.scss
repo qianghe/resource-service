@@ -1,0 +1,56 @@
+.d2i {
+  width: 400px;
+  padding: 0 12px 12px 12px;
+  text-align: left;
+  border: 1px solid #999;
+  cursor: default;
+  background-color: #242424;
+}
+
+.d2i-title {
+  padding-bottom: 16px;
+  padding-top: 20px;
+  margin: 0;
+}
+
+.d2i-desc {
+  line-height: 22px;
+  color: #a9a9a9;
+  font-size: 13px;
+  padding-bottom: 20px;
+}
+
+.d2i-meta {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: 1rem;
+  line-height: 20px;
+  color: #7d7d7f;
+
+  > span {
+    margin-right: 25px;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+  }
+}
+
+.lang-icon {
+  display: block;
+  margin-right: 5px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: rgb(241, 224, 90);
+}
+
+$outlineClassName: outline;
+:export {
+  outline1: $outlineClassName;
+}
+
+.#{$outlineClassName} {
+  outline: 1px solid red;
+  outline-offset: -1px;
+}
