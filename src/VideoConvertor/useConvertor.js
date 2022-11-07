@@ -31,7 +31,9 @@ function useConvertor({ needControll = false, controllRef = null }) {
   const translate = useCallback(async (file, targetName = 'demo') => {
     const ffmpeg = ffmpegRef.current
     console.log('Start transcoding')
-    await ffmpeg.load()
+    if (!ffmpeg.isLoaded()) {
+      await ffmpeg.load()
+    }
     
     ffmpeg.FS('writeFile', file.name, await fetchFile(file));
     const targetFile = `${targetName}.gif`
